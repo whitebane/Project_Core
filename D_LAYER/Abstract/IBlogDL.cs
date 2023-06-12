@@ -9,6 +9,8 @@ namespace D_LAYER.Abstract
 {
     public interface IBlogDL:IGenericDL<Blog>
     {
-      
+        List<Blog> GetListWithCategory();
+
+
     }
 }

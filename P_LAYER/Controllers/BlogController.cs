@@ -1,12 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using B_LAYER.Concrete;
+using D_LAYER.EntityFramework;
+using Microsoft.AspNetCore.Mvc;
 
 namespace P_LAYER.Controllers
 {
     public class BlogController : Controller
     {
+        BlogManager bm = new BlogManager(new EFBlogRepository());
         public IActionResult Index()
         {
-            return View();
+            var values = bm.GetBlogListWithCategory();
+            return View(values);
         }
-    }
+
+
+    } 
 }
