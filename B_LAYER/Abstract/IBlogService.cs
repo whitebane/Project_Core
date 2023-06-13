@@ -18,5 +18,6 @@ namespace B_LAYER.Abstract
 		List<Blog> GetAll();
 		Blog GetByID(int id);
 		List<Blog> GetBlogListWithCategory();
+	    
 	}
 }

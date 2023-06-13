@@ -12,6 +12,13 @@ namespace P_LAYER.Controllers
             var values = bm.GetBlogListWithCategory();
             return View(values);
         }
+        public IActionResult Details(int id) 
+        {
+
+            return View();
+        
+        
+        }
 
 
     } 

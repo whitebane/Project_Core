@@ -43,6 +43,14 @@ namespace B_LAYER.Concrete
 			throw new NotImplementedException();
 		}
 
+		public List<Blog> GetBlogByID(int id)
+		
+		{ 
+		
+		  return _blogDal.GetAll(x=>x.BlogID==id);
+		
+		}
+
 		public void UpdateBlog(Blog blog)
 		{
 			throw new NotImplementedException();
