@@ -33,6 +33,8 @@ namespace B_LAYER.Concrete
 			return _blogDal.GetAll();
 		}
 
+
+		
         public List<Blog> GetBlogListWithCategory()
         {
            return _blogDal.GetListWithCategory();
