@@ -14,7 +14,7 @@ namespace E_LAYER.Concrete
         public string WriterName { get; set; }
         public string WriterAbout { get; set; }
         public string WriterImg { get; set; }
-        public string WriterStatus { get; set; }
+        public bool WriterStatus { get; set; }
 
         public string WriterMail { get; set; }
 

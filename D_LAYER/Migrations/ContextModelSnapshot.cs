@@ -225,9 +225,8 @@ namespace D_LAYER.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("WriterStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("WriterStatus")
+                        .HasColumnType("bit");
 
                     b.HasKey("WriterID");
 

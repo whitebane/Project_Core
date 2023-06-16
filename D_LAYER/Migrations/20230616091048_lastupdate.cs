@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace D_LAYER.Migrations
 {
     /// <inheritdoc />
-    public partial class mig1 : Migration
+    public partial class lastupdate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,24 +31,6 @@ namespace D_LAYER.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Blogs",
-                columns: table => new
-                {
-                    BlogID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BlogTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BlogContent = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BlogLittleImg = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BlogImage = table.Column<string>(type: "nvarchar(m ax)", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BlogStatus = table.Column<bool>(type: "bit", nullable: false)
-                }, 
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Blogs", x => x.BlogID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
@@ -61,23 +43,6 @@ namespace D_LAYER.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.CategoryID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Comments",
-                columns: table => new
-                {
-                    CommentID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CommentUserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CommentTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CommentContent = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CommentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CommentStatus = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comments", x => x.CommentID);
                 });
 
             migrationBuilder.CreateTable(
@@ -107,7 +72,7 @@ namespace D_LAYER.Migrations
                     WriterName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     WriterAbout = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     WriterImg = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WriterStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WriterStatus = table.Column<bool>(type: "bit", nullable: false),
                     WriterMail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     WriterPass = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -115,6 +80,65 @@ namespace D_LAYER.Migrations
                 {
                     table.PrimaryKey("PK_Writers", x => x.WriterID);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Blogs",
+                columns: table => new
+                {
+                    BlogID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BlogTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BlogContent = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BlogLittleImg = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BlogImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BlogStatus = table.Column<bool>(type: "bit", nullable: false),
+                    CategoryID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Blogs", x => x.BlogID);
+                    table.ForeignKey(
+                        name: "FK_Blogs_Categories_CategoryID",
+                        column: x => x.CategoryID,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    CommentID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CommentUserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CommentTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CommentContent = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CommentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CommentStatus = table.Column<bool>(type: "bit", nullable: false),
+                    BlogID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.CommentID);
+                    table.ForeignKey(
+                        name: "FK_Comments_Blogs_BlogID",
+                        column: x => x.BlogID,
+                        principalTable: "Blogs",
+                        principalColumn: "BlogID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Blogs_CategoryID",
+                table: "Blogs",
+                column: "CategoryID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_BlogID",
+                table: "Comments",
+                column: "BlogID");
         }
 
         /// <inheritdoc />
@@ -124,12 +148,6 @@ namespace D_LAYER.Migrations
                 name: "Abouts");
 
             migrationBuilder.DropTable(
-                name: "Blogs");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
-
-            migrationBuilder.DropTable(
                 name: "Comments");
 
             migrationBuilder.DropTable(
@@ -137,6 +155,12 @@ namespace D_LAYER.Migrations
 
             migrationBuilder.DropTable(
                 name: "Writers");
+
+            migrationBuilder.DropTable(
+                name: "Blogs");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

@@ -14,6 +14,7 @@ namespace P_LAYER.Controllers
         }
         public IActionResult Details(int id) 
         {
+            ViewBag.i= id;
             var values=bm.GetBlogByID(id);
             return View(values);
 

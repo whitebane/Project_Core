@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace D_LAYER.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230608084017_mig3")]
-    partial class mig3
+    [Migration("20230616091048_lastupdate")]
+    partial class lastupdate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -228,9 +228,8 @@ namespace D_LAYER.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("WriterStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("WriterStatus")
+                        .HasColumnType("bit");
 
                     b.HasKey("WriterID");
 
