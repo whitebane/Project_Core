@@ -18,6 +18,7 @@ namespace B_LAYER.Abstract
 		List<Blog> GetAll();
 		Blog GetByID(int id);
 		List<Blog> GetBlogListWithCategory();
+		List<Blog> GetBlogListWithWriter(int id);
 	    
 	}
 }

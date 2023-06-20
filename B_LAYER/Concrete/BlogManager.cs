@@ -57,6 +57,11 @@ namespace B_LAYER.Concrete
 		{
 			throw new NotImplementedException();
 		}
+
+		public List<Blog> GetBlogListWithWriter(int id)
+		{
+			return _blogDal.GetAll(x=>x.WriterID==id); 
+		}
 	}
 }
 

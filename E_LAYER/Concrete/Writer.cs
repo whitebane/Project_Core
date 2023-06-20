@@ -20,5 +20,7 @@ namespace E_LAYER.Concrete
 
         public string WriterPass { get; set; }
 
+        public List<Blog> Blogs { get; set; }
+
     }
 }
