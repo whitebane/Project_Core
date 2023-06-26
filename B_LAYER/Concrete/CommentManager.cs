@@ -20,7 +20,7 @@ namespace B_LAYER.Concrete
 
 		public void AddComment(Comment comment)
 		{
-			throw new NotImplementedException();
+		 commentDL.Insert(comment);
 		}
 
 		public List<Comment> GetAll(int id)

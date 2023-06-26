@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace D_LAYER.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230616091048_lastupdate")]
-    partial class lastupdate
+    [Migration("20230621094634_new_md2")]
+    partial class new_md2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,9 +98,14 @@ namespace D_LAYER.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("WriterID")
+                        .HasColumnType("int");
+
                     b.HasKey("BlogID");
 
                     b.HasIndex("CategoryID");
+
+                    b.HasIndex("WriterID");
 
                     b.ToTable("Blogs");
                 });
@@ -244,7 +249,15 @@ namespace D_LAYER.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("E_LAYER.Concrete.Writer", "Writer")
+                        .WithMany("Blogs")
+                        .HasForeignKey("WriterID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
+
+                    b.Navigation("Writer");
                 });
 
             modelBuilder.Entity("E_LAYER.Concrete.Comment", b =>
@@ -264,6 +277,11 @@ namespace D_LAYER.Migrations
                 });
 
             modelBuilder.Entity("E_LAYER.Concrete.Category", b =>
+                {
+                    b.Navigation("Blogs");
+                });
+
+            modelBuilder.Entity("E_LAYER.Concrete.Writer", b =>
                 {
                     b.Navigation("Blogs");
                 });

@@ -23,4 +23,8 @@
     <ProjectReference Include="..\E_LAYER\E_LAYER.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace D_LAYER.Migrations
 {
     /// <inheritdoc />
-    public partial class lastupdate : Migration
+    public partial class new_md2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -93,7 +93,8 @@ namespace D_LAYER.Migrations
                     BlogImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BlogStatus = table.Column<bool>(type: "bit", nullable: false),
-                    CategoryID = table.Column<int>(type: "int", nullable: false)
+                    CategoryID = table.Column<int>(type: "int", nullable: false),
+                    WriterID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -103,6 +104,12 @@ namespace D_LAYER.Migrations
                         column: x => x.CategoryID,
                         principalTable: "Categories",
                         principalColumn: "CategoryID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Blogs_Writers_WriterID",
+                        column: x => x.WriterID,
+                        principalTable: "Writers",
+                        principalColumn: "WriterID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -136,6 +143,11 @@ namespace D_LAYER.Migrations
                 column: "CategoryID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Blogs_WriterID",
+                table: "Blogs",
+                column: "WriterID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Comments_BlogID",
                 table: "Comments",
                 column: "BlogID");
@@ -154,13 +166,13 @@ namespace D_LAYER.Migrations
                 name: "Contacts");
 
             migrationBuilder.DropTable(
-                name: "Writers");
-
-            migrationBuilder.DropTable(
                 name: "Blogs");
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Writers");
         }
     }
 }
