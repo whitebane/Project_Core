@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace B_LAYER.Abstract
 {
-	public interface IAboutService
-	{
-		
+    public interface IContactService
+    {
 
-		List<About>GetAll();
-	}
+        void ContactAdd(Contact contact);
+    }
 }
-  

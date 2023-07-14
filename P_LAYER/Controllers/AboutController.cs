@@ -1,4 +1,5 @@
-﻿using B_LAYER.Concrete;
+﻿
+using B_LAYER.Concrete;
 using D_LAYER.EntityFramework;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,7 @@ namespace P_LAYER.Controllers
 		public PartialViewResult SocialMedia()
 		{
 		
-			return PartialView();
+			return PartialView(); 
 		}
 	}
 }
